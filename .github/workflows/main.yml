@@ -12,9 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up Trivy
-        uses: aquasecurity/trivy-action@master
+      - name: Install Trivy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.49.1_Linux-64bit.deb
+          sudo dpkg -i trivy_0.49.1_Linux-64bit.deb
 
       - name: Run Trivy license scan
         run: |
-          trivy image --scanners license --exit-code 1 alpine/openssl
+          trivy image --scanners license --exit-code 1 alpinelinux/openssl
