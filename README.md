@@ -1,0 +1,2 @@
+# ekzamen
+mtuci
