@@ -1,0 +1,20 @@
+name: Trivy License Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Trivy
+        uses: aquasecurity/trivy-action@master
+
+      - name: Run Trivy license scan
+        run: |
+          trivy image --scanners license --exit-code 1 alpine/openssl
